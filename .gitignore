@@ -1,0 +1,4 @@
+!.gitignore
+messages.db
+.env
+.idea/

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="/assets/scripts/send.js"></script>
+    <meta charset="UTF-8">
+    <title>Thread</title>
+</head>
+<body>
+<a href="/">Home</a>
+<form enctype="multipart/form-data" name="messagebox">
+    <label for="message">Reply: </label>
+    <input id="message" type="text" name="message" required>
+    <button type="submit" id="submitButton">
+        <span>Send</span>
+    </button>
+</form>
+<ul>
+    {% for message in messages %}
+    <li><p>{{message.msg_time | gmtime_ms}} UTC: {{message.message}}</p></li>
+    {% endfor %}
+</ul>
+</body>
+</html>
