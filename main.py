@@ -87,13 +87,8 @@ async def reply_topic(request: sanic.Request, thread_id: str) -> sanic.HTTPRespo
 
 @app.get("/")
 async def index(request: sanic.Request) -> sanic.HTTPResponse:
-	id_cursor: aiosqlite.Cursor = await request.app.ctx.db.execute("select distinct thread_id from messages")
-	ids = tuple(map(lambda x: x[0], (await id_cursor.fetchall())))
-	await id_cursor.close()
 	cursor: aiosqlite.Cursor = await request.app.ctx.db.execute(
-		"select thread_id,message,min(msg_time) as min_msg_time from messages where thread_id "
-		f"in({','.join(('?',) * len(ids))}) group by thread_id order by msg_time DESC",
-		ids)
+		"select thread_id,message,min(msg_time) as min_msg_time from messages group by thread_id order by msg_time DESC")
 
 	threads = tuple(map(dict, await cursor.fetchall()))
 	await cursor.close()
