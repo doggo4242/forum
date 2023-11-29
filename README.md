@@ -40,7 +40,7 @@ and the send button is re-enabled.
 The database is an SQLite database consisting of a single table `messages`
 containing 3 columns:
 * `message`: a user's message
-* `thread_id`: the id of a thread
+* `thread_id`: the id of the thread the message was sent in
 * `msg_time`: the time at which the message was sent
 
 #### Receiving messages
