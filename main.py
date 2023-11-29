@@ -73,7 +73,7 @@ async def new_topic(request: sanic.Request) -> sanic.HTTPResponse:
 @app.post("/thread/<thread_id:str>")
 async def reply_topic(request: sanic.Request, thread_id: str) -> sanic.HTTPResponse:
 	if not request.form or 'message' not in request.form:
-		return sanic.response.text("Missing fields", status=400)
+		return sanic.response.text("Missing message field", status=400)
 
 	cursor: aiosqlite.Cursor = await request.app.ctx.db.execute(
 		'select exists(select 1 from messages where thread_id=?)',
